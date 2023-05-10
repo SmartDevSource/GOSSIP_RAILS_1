@@ -49,6 +49,12 @@ class GossipsController < ApplicationController
       GossipTag.find_by(id: params[:id]).destroy
     end
 
+    Comment.all.each { |c| 
+    if c.gossip_id == params[:id]
+       c.destroy
+      end
+    }
+
     @gossip.destroy
     flash[:success] = "Le potin a été détruit !"
     redirect_to '/'
