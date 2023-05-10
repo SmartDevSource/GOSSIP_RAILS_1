@@ -8,7 +8,7 @@
   </head>
   <body class="bk_user">
     <nav class="navbar navbar-expand-sm navbar navbar-dark bg-success" style="background-color: #e3f2fd">
-      <a class="navbar-brand" href="#" style="margin-left: 10px">GOSSIP Project</a>
+      <%= link_to "GOSSIP Project", root_path, :class=>"navbar-brand", style:"margin-left: 10px"%>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -29,20 +29,31 @@
         </ul>
     </nav>
     <center>
-      <h1><%= @user.first_name %></h1>
-      <br>
-        Prénom : <%= @user.first_name %>
-        <br><br>
-        Nom : <%= @user.last_name %>
-        <br><br>
-        Email : <%= @user.email %>
-        <br><br>
-        Age : <%= @user.age %>
-        <br><br>
-        Ville : <%= link_to "#{@city.name}", city_path(@user.city_id), :class=>"my_link" %></a>
-        <br><br>
-        Description : <%=@user.description%>
-        <br>
+    <br>
+      <h1><p class = "text-secondary">Tous les potins de la ville de <%= @city.name %></p></h1>
+      <br><br>
+      <!-- POST-IT START -->
+      <div class="container bootstrap snippets bootdeys">
+        <div class="row">
+          <% Gossip.all.each_with_index do |gossip, index| %>
+            <% if User.find_by(id: gossip.user_id).city_id == @city.id%>
+              <% inc = index % 5 %>
+                <div class="col-4 content-card">
+                  <div class="card-big-shadow">
+                    <div class="card card-just-text" data-background="color" data-color="<%= @colors[inc] %>" data-radius="none">
+                      <div class="content">
+                        <h6 class="category">par <%= gossip.user.first_name %></h6>
+                        <h4 class="title"><a href="/gossips/<%= gossip.id %>"><%= gossip.title %></a></h4>
+                        <p class="description"><%= gossip.content %></p>
+                      </div>
+                    </div> <!-- end card -->
+                  </div>
+                </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <!-- POST-IT END -->
       <br>
       <br>
       <%= link_to "Revenir à la page d'accueil", root_path, :class=>"navbar-brand my_link" %>

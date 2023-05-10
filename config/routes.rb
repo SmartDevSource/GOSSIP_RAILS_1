@@ -10,4 +10,5 @@ Rails.application.routes.draw do
   root to: redirect('/gossips')
   
   resources :users, only: [:show]
+  resources :cities
 end

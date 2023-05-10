@@ -14,6 +14,10 @@
  *= require_self
  */
 
+ .form-control{
+  max-width: 400px;
+ }
+
 .my_link {
   text-decoration: none;
   color:rgb(51, 131, 131);

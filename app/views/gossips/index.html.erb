@@ -9,7 +9,7 @@
   <body class="bk_index">
     <!-- NAV BAR START -->
     <nav class="navbar navbar-expand-sm navbar navbar-dark bg-success" style="background-color: #e3f2fd">
-      <a class="navbar-brand" href="#" style="margin-left: 10px">GOSSIP Project</a>
+      <%= link_to "GOSSIP Project", root_path, :class=>"navbar-brand", style:"margin-left: 10px"%>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -31,6 +31,7 @@
     </nav>
     <!-- NAV BAR END-->
     <center>
+    <br>
       <% if flash[:success].present? %>
         <div class="alert alert-success custom_alert" role="alert">
           <%= flash[:success] %>
@@ -41,11 +42,12 @@
       <p><h4><p class = "text-secondary">Bienvenue sur la page des potins !</p></h4>
       <br>
       <p><h6><p class = "text-secondary">Voici la liste des potins :</p></h6>
+      <br>
     
       <!-- POST-IT START -->
       <div class="container bootstrap snippets bootdeys">
         <div class="row">
-          <% @titles.each_with_index do |gossip, index| %>
+          <% @titles.reverse_each.with_index do |gossip, index| %>
           <% inc = index % 5 %>
             <div class="col-4 content-card">
               <div class="card-big-shadow">
@@ -62,6 +64,10 @@
         </div>
       </div>
       <!-- POST-IT END -->
+      <br>
+      <br>
+      <%= link_to "Revenir en haut de la page", root_path, :class=>"navbar-brand my_link" %>
+      <br><br><br>
     </center>
   </body>
 </html>

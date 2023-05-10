@@ -26,4 +26,15 @@ class GossipsController < ApplicationController
     end
   end
 
+  def edit
+    @gossip = Gossip.find_by(id: params[:id])
+
+  end
+
+  def update
+    @gossip = Gossip.find_by(id: params[:id])
+    params_permitted = params.require(:gossip).permit(:title, :content)
+    @gossip.update(params_permitted)
+  end
+
 end

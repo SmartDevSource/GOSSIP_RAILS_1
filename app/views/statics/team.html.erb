@@ -8,7 +8,7 @@
   </head>
   <body class="bk_team">
     <nav class="navbar navbar-expand-sm navbar navbar-dark bg-success" style="background-color: #e3f2fd">
-      <a class="navbar-brand" href="#" style="margin-left: 10px">GOSSIP Project</a>
+      <%= link_to "GOSSIP Project", root_path, :class=>"navbar-brand", style:"margin-left: 10px"%>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -31,6 +31,10 @@
     <center>
       <h1><p class = "text-secondary">TEAM</h1>
       <p>voici notre équipe lol mdr 😇❤️😻</p>
+      <br>
+      <br>
+      <%= link_to "Revenir à la page d'accueil", root_path, :class=>"navbar-brand my_link" %>
+      <br><br><br>
     </center>
   </body>
 </html>
