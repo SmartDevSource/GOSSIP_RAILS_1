@@ -40,11 +40,15 @@
       <br><br>
       <br><h4><p class = "text-secondary">Espace commentaires</p></h4>
 
+      <br>
+        Il y a <%=@index.comments.count %> commentaires.
+      <br>
       <% Comment.all.each do |c| %>
         <% if c.gossip_id == @index.id%>
           <br><%=User.find_by(id: c.user_id).first_name %> : <%= c.content%>
         <% end %>
       <% end %>
+      
       <br><br>
       <h1><p class = "text-secondary">Rédiger un commentaire</h1></p>
       <br>
