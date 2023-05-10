@@ -28,13 +28,30 @@ class GossipsController < ApplicationController
 
   def edit
     @gossip = Gossip.find_by(id: params[:id])
-
   end
 
   def update
     @gossip = Gossip.find_by(id: params[:id])
     params_permitted = params.require(:gossip).permit(:title, :content)
-    @gossip.update(params_permitted)
+
+    if @gossip.update(params_permitted)
+      flash[:success] = "Le potin a été mis à jour !"
+      redirect_to '/'
+    else
+      render 'edit'
+    end
+  end
+
+  def destroy
+    @gossip = Gossip.find_by(id: params[:id])
+    
+    if (GossipTag.find_by(id: params[:id]) != nil)
+      GossipTag.find_by(id: params[:id]).destroy
+    end
+
+    @gossip.destroy
+    flash[:success] = "Le potin a été détruit !"
+    redirect_to '/'
   end
 
 end

@@ -35,7 +35,8 @@
       <p>Depuis la ville de <%= link_to "#{City.find(@user.city_id).name}", city_path(@user.city_id), :class=>"my_link" %></a></p> 
       <br>
       <p><%= @index.content %></p>
-      <br><%= link_to "Modifier le potin", edit_gossip_path(@index.id), :class=>"btn btn-danger" %>
+      <br><%= button_to "Modifier ce potin", edit_gossip_path(@index.id), :class=>"btn btn-warning", method: :get %>
+      <%= button_to "Détruire ce potin", gossip_path(@index.id), :class=>"btn btn-danger", form: { data:{turbo_confirm: "Êtes-vous CERTAIN(E) ?"}}, method: :delete %>
       <br><br>
       <%= link_to "Revenir à la page d'accueil", root_path, :class=>"navbar-brand my_link" %>
       <br><br><br>

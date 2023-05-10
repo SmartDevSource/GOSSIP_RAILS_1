@@ -13,6 +13,10 @@
  *= require_tree .
  *= require_self
  */
+ 
+ .button_to{
+  display:inline-flex;
+ }
 
  .form-control{
   max-width: 400px;
