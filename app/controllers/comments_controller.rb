@@ -1,9 +1,9 @@
 class CommentsController < ApplicationController
-  
-  def new
-  end
 
   def create
+    @comment = Comment.create(content: params[:content], user_id:User.all.sample.id, gossip_id: params[:gossip_id], commentable: [Gossip.all, Comment.all].sample.sample)
+    flash[:notice] = "Le commentaire a été publié ! "
+    redirect_to gossip_path(params[:gossip_id])
   end
 
   def edit
