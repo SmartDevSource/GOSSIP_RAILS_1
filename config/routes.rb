@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   get 'team' => 'statics#team'
   get 'contact' => 'statics#contact'
   get 'welcome/:first_name' => 'statics#welcome'
@@ -11,4 +10,5 @@ Rails.application.routes.draw do
   
   resources :users, only: [:show]
   resources :cities
+  resources :comments, except: [:show, :index, :new]
 end
