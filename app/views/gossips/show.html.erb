@@ -6,8 +6,10 @@
       <p>Depuis la ville de <%= link_to "#{City.find(@user.city_id).name}", city_path(@user.city_id), :class=>"my_link" %></a></p> 
       <br>
       <p><%= @index.content %></p>
-      <br><%= button_to "Modifier ce potin", edit_gossip_path(@index.id), :class=>"btn btn-warning", method: :get %>
-      <%= button_to "Détruire ce potin", gossip_path(@index.id), :class=>"btn btn-danger", form: { data:{turbo_confirm: "Êtes-vous CERTAIN(E) ?"}}, method: :delete %>
+      <%if current_user && current_user.id == @user.id%>
+        <br><%= button_to "Modifier ce potin", edit_gossip_path(@index.id), :class=>"btn btn-warning", method: :get %>
+        <%= button_to "Détruire ce potin", gossip_path(@index.id), :class=>"btn btn-danger", form: { data:{turbo_confirm: "Êtes-vous CERTAIN(E) ?"}}, method: :delete %>
+      <%end%>
       <br><br>
       <br><h4><p class = "text-secondary">Espace commentaires</p></h4>
 
@@ -18,23 +20,24 @@
       <% Comment.all.each do |c| %>
         <% if c.gossip_id == @index.id%>
           <br><%=User.find_by(id: c.user_id).first_name %> : <%= c.content%> - 
-          <%=button_to "Editer", edit_gossip_comment_url(@index, c.id), :class=>"btn btn-warning", method: :get %>
-          <%=button_to "Supprimer", gossip_comment_path(@index, c.id), :class=>"btn btn-danger", form: { data:{turbo_confirm: "Êtes-vous CERTAIN(E) ?"}}, method: :delete %>
+          <%if current_user && current_user.id == c.user_id %>
+            <%=button_to "Editer", edit_gossip_comment_url(@index, c.id), :class=>"btn btn-warning", method: :get %>
+            <%=button_to "Supprimer", gossip_comment_path(@index, c.id), :class=>"btn btn-danger", form: { data:{turbo_confirm: "Êtes-vous CERTAIN(E) ?"}}, method: :delete %>
+          <%end%>
           <br>
         <% end %>
       <% end %>
-      
-      <br><br>
-      <h1><p class = "text-secondary">Rédiger un commentaire</h1></p>
-      <br>
 
-      <%= form_tag(gossip_comments_path(@index), method: :post) do%>
-        <%= label_tag "Rédiger un commentaire" %>
-        <br><br>
-        <%= text_area_tag :content, nil, placeholder: "Votre commentaire...", rows: 5, cols: 50 %>
-        <br><br>
-        <%= submit_tag "Publier ce commentaire.", data: {turbo:false} %>
-      <% end %>
+      <%if current_user%>
+        <br><br><h1><p class = "text-secondary">Rédiger un commentaire</h1></p><br>
+        <%= form_tag(gossip_comments_path(@index), method: :post) do%>
+          <%= label_tag "Rédiger un commentaire" %>
+            <br><br>
+              <%= text_area_tag :content, nil, placeholder: "Votre commentaire...", rows: 5, cols: 50 %>
+            <br><br>
+          <%= submit_tag "Publier ce commentaire.", data: {turbo:false} %>
+        <% end %>
+      <%end%>
       
       <br><br><br>
       <%= link_to "Revenir à la page d'accueil", root_path, :class=>"navbar-brand my_link" %>

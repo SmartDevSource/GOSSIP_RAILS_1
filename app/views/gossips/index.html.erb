@@ -8,7 +8,7 @@
       <br>
       <p><h6><p class = "text-secondary">Voici la liste des potins :</p></h6>
       <br>
-    
+
       <!-- POST-IT START -->
       <div class="container bootstrap snippets bootdeys">
         <div class="row">
@@ -19,8 +19,12 @@
                 <div class="card card-just-text" data-background="color" data-color="<%= @colors[inc] %>" data-radius="none">
                   <div class="content">
                     <h6 class="category">par <%= gossip.user.first_name %></h6>
-                    <h4 class="title"><a href="/gossips/<%= gossip.id %>"><%= gossip.title %></a></h4>
-                    <p class="description"><%= gossip.content %></p>
+                      <h4 class="title"><a href="/gossips/<%= gossip.id %>"><%= gossip.title %></a></h4>
+                        <p class="description"><%= gossip.content %></p>
+                          <i class="fas fa-thumbs-up"></i>
+                        <%if current_user%>
+                      <br><br><button type="button" class="btn btn-success justify-content-end">J'aime</button>
+                    <%end%>
                   </div>
                 </div> <!-- end card -->
               </div>

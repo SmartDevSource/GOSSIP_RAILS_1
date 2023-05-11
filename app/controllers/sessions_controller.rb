@@ -13,7 +13,6 @@ class SessionsController < ApplicationController
       redirect_to root_path
     else
       flash[:alert] = "Email ou mot de passe invalide."
-      puts "foiré"
       render 'new'
     end
   end

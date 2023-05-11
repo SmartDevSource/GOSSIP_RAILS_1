@@ -34,14 +34,16 @@
             <%= link_to "Accueil", root_path, :class=>"nav-link text-white" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "Team", team_path, :class=>"nav-link text-white" %>
+            <%= link_to "L'équipe", team_path, :class=>"nav-link text-white" %>
           </li>
           <li class="nav-item active">
             <%= link_to "Contact", contact_path, :class=>"nav-link text-white" %>
           </li>
+        <%if current_user%>
           <li class="nav-item active">
             <%= link_to "Créer un potin", new_gossip_path, :class=>"nav-link text-white" %>
           </li>
+        <%end%>
         </ul>
         </div>
 
