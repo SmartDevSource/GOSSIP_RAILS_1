@@ -21,9 +21,16 @@
                     <h6 class="category">par <%= gossip.user.first_name %></h6>
                       <h4 class="title"><a href="/gossips/<%= gossip.id %>"><%= gossip.title %></a></h4>
                         <p class="description"><%= gossip.content %></p>
-                          <i class="fas fa-thumbs-up"></i>
+                          <i class="fas fa-thumbs-up">
+                            <%counter_like = 0%>
+                            <%Like.all.each do |like|%>
+                              <% if (like.gossip_id == gossip.id) then counter_like+=1 end%>
+                            <% end %>
+                            <%=counter_like%>
+                          </i>
                         <%if current_user%>
-                      <br><br><button type="button" class="btn btn-success justify-content-end">J'aime</button>
+
+                      <br><br><%=button_to "J'aime", likesgossip_index_path(gossip_id: gossip.id), :class=>"btn btn-success", method: :post %>
                     <%end%>
                   </div>
                 </div> <!-- end card -->

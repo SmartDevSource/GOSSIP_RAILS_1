@@ -28,7 +28,16 @@
         <% end %>
       <% end %>
 
+      <i class="fas fa-thumbs-up">
+        <%counter_like = 0%>
+          <%Like.all.each do |like|%>
+            <% if (like.gossip_id == @index.id) then counter_like+=1 end%>
+          <% end %>
+        <%=counter_like%>
+      </i>
+
       <%if current_user%>
+        <br><br><%=button_to "J'aime", likesgossip_index_path(gossip_id: @index.id), :class=>"btn btn-success", method: :post %>
         <br><br><h1><p class = "text-secondary">Rédiger un commentaire</h1></p><br>
         <%= form_tag(gossip_comments_path(@index), method: :post) do%>
           <%= label_tag "Rédiger un commentaire" %>
