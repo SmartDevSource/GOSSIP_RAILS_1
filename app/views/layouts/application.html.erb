@@ -45,16 +45,26 @@
         </ul>
         </div>
 
-      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <%= link_to "S'inscrire", new_user_path, :class=>"nav-link text-white" %>
-          </li>
-          <li class="nav-item active">
-            <%= link_to "Se connecter", new_session_path, :class=>"nav-link text-white" %>
-          </li>
-        </ul>
-      </div>
+      <%if current_user%>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <%= button_to "Se déconnecter", session_path(current_user.id), :class=>"btn btn-success", method: :delete %>
+            </li>
+          </ul>
+        </div>
+      <%else%>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <%= link_to "S'inscrire", new_user_path, :class=>"nav-link text-white" %>
+            </li>
+            <li class="nav-item active">
+              <%= link_to "Se connecter", new_session_path, :class=>"nav-link text-white" %>
+            </li>
+          </ul>
+        </div>
+      <%end%>
 
     </nav>
 

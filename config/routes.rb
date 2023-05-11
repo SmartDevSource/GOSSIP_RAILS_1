@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   root to: redirect('/gossips')
   
   resources :users, only: [:show, :new, :create]
-  resources :sessions
+  resources :sessions, only: [:new, :create, :destroy]
   resources :cities
 
   resources :gossips do
