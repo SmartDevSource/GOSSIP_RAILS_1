@@ -25,7 +25,11 @@
                             <%=counter_like%>
                           </i>
                         <%if current_user%>
-                      <br><br><%=button_to "J'aime", likesgossip_index_path(gossip_id: gossip.id), :class=>"btn btn-success", method: :post %>
+                        <%if already_exists?(gossip)%>
+                          <br><br><%=button_to "J'aime pas", likesgossip_path(id: gossip.id), :class=>"btn btn-success", method: :delete %>
+                            <%else%>
+                          <br><br><%=button_to "J'aime", likesgossip_index_path(gossip_id: gossip.id), :class=>"btn btn-success", method: :post %>
+                        <%end%>
                       <%end%>
                       </div>
                     </div> <!-- end card -->

@@ -2,9 +2,6 @@ class LikesgossipController < ApplicationController
 
   def new
     @like = Like.new
-    puts "*"*60
-    puts "dans le new"
-    puts "*"*60
   end
 
   def create
@@ -17,6 +14,14 @@ class LikesgossipController < ApplicationController
       Rails.logger.info(@like.errors.inspect)
     end
 
+  end
+
+  def destroy
+    @like = Like.find_by(gossip_id: params[:id], user_id: current_user.id)
+    if (@like.destroy)
+      redirect_back(fallback_location: root_path)
+      Rails.logger.info(@like.errors.inspect)
+    end
   end
   
 end
