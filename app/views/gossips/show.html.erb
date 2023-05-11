@@ -1,12 +1,6 @@
 <!DOCTYPE html>
 <html>
-    <center>
-      <% if flash[:success].present? %>
-        <div class="alert alert-success custom_alert" role="alert">
-          <%= flash[:success] %>
-        </div>
-      <% end %>
-      
+    <center>      
       <h1><p class = "text-secondary"><%= @index.title %></h1></p>
       <p>par <%= link_to "#{@user.first_name}", user_path(@user.id), :class=>"my_link" %></a> le <%= @index.created_at.strftime("%d/%m/%Y %H:%M") %></p>
       <p>Depuis la ville de <%= link_to "#{City.find(@user.city_id).name}", city_path(@user.city_id), :class=>"my_link" %></a></p> 

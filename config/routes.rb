@@ -8,9 +8,12 @@ Rails.application.routes.draw do
   # set le root en redirigeant le / vers /gossips 
   root to: redirect('/gossips')
   
-  resources :users, only: [:show]
+  resources :users, only: [:show, :new, :create]
+  resources :sessions
   resources :cities
+
   resources :gossips do
     resources :comments, only: [:create, :edit, :update, :destroy]
   end
+
 end
